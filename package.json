@@ -20,7 +20,7 @@
     "twilio": "^5.12.2"
   },
   "engines": {
-    "node": ">=22.5.0"
+    "node": "22.x"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
