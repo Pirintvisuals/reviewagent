@@ -3,7 +3,9 @@
 const { DatabaseSync } = require('node:sqlite');
 const path = require('path');
 
-const DB_PATH = path.join(__dirname, 'landscaper.db');
+const DB_PATH = process.env.VERCEL
+  ? '/tmp/landscaper.db'
+  : path.join(__dirname, 'landscaper.db');
 
 let db;
 

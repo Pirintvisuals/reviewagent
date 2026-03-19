@@ -37,10 +37,14 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-app.listen(PORT, () => {
-  console.log(`🌿 Landscaper Review System backend running on http://localhost:${PORT}`);
-  console.log(`   Anthropic configured: ${process.env.ANTHROPIC_API_KEY && process.env.ANTHROPIC_API_KEY !== 'sk-ant-your_key_here' ? '✅' : '❌ (AI will be simulated)'}`);
-  console.log(`   Resend configured:    ${process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== 're_your_key_here' ? '✅' : '⚠️  (emails logged to console)'}`);
-  console.log(`   Twilio configured:    ${process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_ACCOUNT_SID !== 'your_account_sid' ? '✅' : '⚠️  (WhatsApp will be simulated)'}`);
-  console.log(`   Review delay:         ${process.env.REVIEW_DELAY_HOURS ?? '2'}h`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🌿 Landscaper Review System backend running on http://localhost:${PORT}`);
+    console.log(`   Anthropic configured: ${process.env.ANTHROPIC_API_KEY && process.env.ANTHROPIC_API_KEY !== 'sk-ant-your_key_here' ? '✅' : '❌ (AI will be simulated)'}`);
+    console.log(`   Resend configured:    ${process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== 're_your_key_here' ? '✅' : '⚠️  (emails logged to console)'}`);
+    console.log(`   Twilio configured:    ${process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_ACCOUNT_SID !== 'your_account_sid' ? '✅' : '⚠️  (WhatsApp will be simulated)'}`);
+    console.log(`   Review delay:         ${process.env.REVIEW_DELAY_HOURS ?? '2'}h`);
+  });
+}
+
+module.exports = app;
